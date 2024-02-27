@@ -13,7 +13,7 @@
 - dictionaries
 """
 
-import argparse, os, sys, time
+import argparse, os, sys, time, datetime
 import matplotlib.pyplot as plt
 from matplotlib.widgets import TextBox
 import numpy as np
@@ -179,6 +179,20 @@ def plot_data(data, fs):
     plt.tight_layout()
     plt.show()
 
+def save_plot_data(data, fs, filename):
+    """Save plot of the data PCA
+
+    Args:
+        data: numpy.array
+        fs: sampling frequency [Hz]
+    """
+    t = np.arange(len(data))/fs # time axis in seconds
+    fig = plt.figure(1, figsize=(20,4))
+    plt.plot(t, data, '-k', linewidth=1)
+    plt.xlabel("time [s]", fontsize=24)
+    plt.ylabel("potential [$\mu$V]", fontsize=24)
+    plt.tight_layout()
+    plt.savefig(filename)
 
 def plot_psd(data, fs, n_seg=1024):
     """Plot the power spectral density (Welch's method)
