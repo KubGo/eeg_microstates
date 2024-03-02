@@ -269,7 +269,7 @@ def eeg2map(data):
 
 
 def clustering(data, fs, chs, locs, mode, n_clusters, n_win=3, \
-               interpol=True, doplot=False):
+               interpol=True, doplot=False, filepath_for_maps=""):
     """EEG microstate clustering algorithms.
 
     Args:
@@ -472,6 +472,8 @@ def clustering(data, fs, chs, locs, mode, n_clusters, n_win=3, \
         axbox = plt.axes([0.1, 0.05, 0.1, 0.1]) #  l, b, w, h
         text_box = TextBox(axbox, 'Ordering: ', initial="[0, 1, 2, 3]")
         text_box.on_submit(f_dummy)
+        if filepath_for_maps != "":
+            plt.savefig(filepath_for_maps + ".jpg")
         plt.show()
         order_str = text_box.text
 
