@@ -369,7 +369,7 @@ def clustering(data, fs, chs, locs, mode, n_clusters, n_win=3, \
         params = {
             "n_components": n_clusters,
             "algorithm": "parallel",
-            "whiten": True,
+            "whiten": "arbitrary-variance",
             "fun": "exp",
             "max_iter": 200,
         }
@@ -772,7 +772,7 @@ def kmedoids(S, K, nruns, maxits):
     n = S.shape[0]
     dpsim = np.zeros((maxits,nruns))
     idx = np.zeros((n,nruns))
-    for rep in xrange(nruns):
+    for rep in range(nruns):
         tmp = np.random.permutation(range(n))
         mu = tmp[:K]
         t = 0
@@ -785,7 +785,7 @@ def kmedoids(S, K, nruns, maxits):
             cl = np.argmax(S[:,mu], axis=1) # max pos. of each row
             # Set assignments of exemplars to themselves
             cl[mu] = range(K)
-            for j in xrange(K): # For each class, find new exemplar
+            for j in range(K): # For each class, find new exemplar
                 I = np.where(cl==j)[0]
                 S_I_rowsum = np.sum(S[I][:,I],axis=0)
                 Scl = max(S_I_rowsum)
