@@ -323,7 +323,7 @@ def clustering(data, fs, chs, locs, mode, n_clusters, n_win=3, \
         C = np.corrcoef(data_cluster_norm)
         C = C**2 # ignore EEG polarity
         kmed_maps = kmedoids(S=C, K=n_clusters, nruns=10, maxits=500)
-        maps = [int(data_cluster[kmed_maps[k],:]) for k in range(n_clusters)]
+        maps = [(data_cluster[kmed_maps.astype(int)[k]]).astype(int) for k in range(n_clusters)]
         maps = np.array(maps)
         del C, kmed_maps
 
